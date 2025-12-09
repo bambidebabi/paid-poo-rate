@@ -429,7 +429,7 @@ input {
 /* --- 新增：Picker Wheel 模拟样式 --- */
 .picker-input {
     width: 100%;
-    /* padding: 12px 15px; /* 略微减少 padding 使其更紧凑 */ */
+    padding: 12px 15px; /* 略微减少 padding 使其更紧凑 */ 
     border: 1px solid #ddd; /* 使用更细的边框 */
     border-radius: 10px;
     font-size: 1.2em; /* 字体略大，突出显示时间 */
@@ -453,3 +453,4 @@ input {
     outline: none;
 
 }
+
