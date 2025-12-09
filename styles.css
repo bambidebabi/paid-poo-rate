@@ -8,7 +8,8 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 20px;
-    box-sizing: border-box;
+    /* 确保 body 也有 box-sizing，虽然对 body 影响较小，但保持一致性 */
+    box-sizing: border-box; 
 }
 
 .calculator-container {
@@ -28,7 +29,7 @@ body {
     font-weight: 800;
 }
 
-/* 结果展示区 */
+/* 结果展示区 - 时薪 */
 .result-card {
     background-color: #e0f7fa; /* 浅青色背景，突出结果 */
     padding: 20px 25px;
@@ -70,155 +71,7 @@ body {
     margin-left: 5px;
 }
 
-/* 输入区 */
-.input-section {
-    margin-bottom: 30px;
-    text-align: left;
-}
-
-.input-group {
-    margin-bottom: 20px;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #444;
-}
-
-input[type="number"] {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    font-size: 1.1em;
-    font-weight: 600;
-    color: #333;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box; /* 确保 padding 不增加宽度 */
-}
-
-input[type="number"]:focus {
-    border-color: #00bcd4; /* 强调色边框 */
-    box-shadow: 0 0 8px rgba(0, 188, 212, 0.2);
-    outline: none;
-}
-
-/* 操作区 */
-.action-section {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.button {
-    padding: 15px 25px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
-    flex-grow: 1;
-}
-
-.button:active {
-    transform: scale(0.98);
-}
-
-.primary {
-    background-color: #00bcd4; /* 强调色 */
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
-}
-
-.primary:hover {
-    background-color: #00acc1; /* 鼠标悬停时的深色 */
-}
-
-.secondary {
-    background-color: #f0f0f0; /* 浅灰色背景 */
-    color: #555;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.secondary:hover {
-    background-color: #e0e0e0;
-}
-/* 基础设置（保留原样）*/
-body {
-    font-family: 'Inter', 'PingFang SC', 'Helvetica Neue', sans-serif;
-    background-color: #f4f7f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.calculator-container {
-    background-color: #ffffff;
-    width: 100%;
-    max-width: 400px;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.title {
-    color: #333;
-    font-size: 1.8em;
-    margin-bottom: 30px;
-    font-weight: 800;
-}
-
-/* 结果展示区 - 时薪（保留原样） */
-.result-card {
-    background-color: #e0f7fa;
-    padding: 20px 25px;
-    margin-bottom: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.1);
-}
-
-.result-label {
-    color: #555;
-    font-weight: 600;
-    margin-bottom: 10px;
-    font-size: 0.9em;
-}
-
-.hourly-rate-display {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    color: #00bcd4;
-}
-
-.currency-symbol {
-    font-size: 1.5em;
-    font-weight: 600;
-    margin-right: 5px;
-}
-
-.rate-value {
-    font-size: 3.5em;
-    font-weight: 800;
-    line-height: 1;
-}
-
-.unit {
-    font-size: 1em;
-    font-weight: 400;
-    color: #777;
-    margin-left: 5px;
-}
-
-/* 实时收入展示区 (New Styling) */
+/* 实时收入展示区 */
 .realtime-card {
     background-color: #f0f8ff; /* 浅蓝色背景，与时薪结果区分 */
     padding: 15px 25px;
@@ -264,7 +117,7 @@ body {
 }
 
 
-/* 输入区（保留原样） */
+/* 输入区 */
 .input-section {
     margin-bottom: 30px;
     text-align: left;
@@ -281,7 +134,14 @@ body {
     color: #444;
 }
 
-input[type="number"] {
+/* 所有输入框的通用字体设置 */
+input {
+    font-family: 'Inter', 'PingFang SC', sans-serif;
+}
+
+input[type="number"], 
+/* 统一时间输入框和数字输入框的样式 */
+.time-group input[type="time"] { 
     width: 100%;
     padding: 15px;
     border: 2px solid #ddd;
@@ -290,13 +150,74 @@ input[type="number"] {
     font-weight: 600;
     color: #333;
     transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
+    /* 关键的盒模型设置，确保边框不超出宽度 */
+    box-sizing: border-box; 
 }
 
-input[type="number"]:focus {
-    border-color: #00bcd4;
+input[type="number"]:focus,
+.time-group input[type="time"]:focus {
+    border-color: #00bcd4; /* 强调色边框 */
     box-shadow: 0 0 8px rgba(0, 188, 212, 0.2);
     outline: none;
+}
+
+/* --- 模式切换样式 --- */
+.toggle-switch {
+    display: flex;
+    background-color: #eee;
+    border-radius: 8px;
+    padding: 4px;
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+    color: #555;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.toggle-button.active {
+    background-color: #ffffff;
+    color: #00bcd4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 模式显示样式 --- */
+.input-mode {
+    transition: opacity 0.3s, max-height 0.3s;
+    overflow: hidden;
+    max-height: 500px; 
+}
+
+.hidden-mode {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.active-mode {
+    opacity: 1;
+}
+
+/* 预估工时总结文本 */
+.summary-text {
+    text-align: right;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+#estimatedHours {
+    font-weight: 800;
+    color: #00bcd4;
 }
 
 /* 操作区（调整布局） */
@@ -345,7 +266,7 @@ input[type="number"]:focus {
     background-color: #e0e0e0;
 }
 
-/* 禁用按钮样式 (New Styling) */
+/* 禁用按钮样式 */
 .button:disabled {
     background-color: #cccccc;
     color: #999999;
@@ -353,77 +274,3 @@ input[type="number"]:focus {
     box-shadow: none;
     opacity: 0.6;
 }
-/* --- 新增模式切换样式 --- */
-.toggle-switch {
-    display: flex;
-    background-color: #eee;
-    border-radius: 8px;
-    padding: 4px;
-    margin-bottom: 20px;
-}
-
-.toggle-button {
-    flex-grow: 1;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 6px;
-    background-color: transparent;
-    color: #555;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.toggle-button.active {
-    background-color: #ffffff;
-    color: #00bcd4;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* --- 模式显示样式 --- */
-.input-mode {
-    transition: opacity 0.3s, max-height 0.3s;
-    overflow: hidden;
-    max-height: 500px; /* 足够高以显示所有内容 */
-}
-
-.hidden-mode {
-    max-height: 0;
-    opacity: 0;
-    margin: 0;
-    padding: 0;
-}
-
-.active-mode {
-    opacity: 1;
-}
-
-/* 时间输入框调整，使其在一行显示得更紧凑 */
-.time-group input[type="time"] {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    font-size: 1.1em;
-    font-weight: 600;
-    color: #333;
-    box-sizing: border-box;
-}
-
-.summary-text {
-    text-align: right;
-    font-size: 0.9em;
-    color: #666;
-    margin-top: -10px;
-    margin-bottom: 20px;
-}
-
-#estimatedHours {
-    font-weight: 800;
-    color: #00bcd4;
-}
-/* 确保所有输入框都使用 Inter 字体 */
-input {
-    font-family: 'Inter', 'PingFang SC', sans-serif;
-}
-
