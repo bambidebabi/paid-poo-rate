@@ -426,19 +426,10 @@ input[type="number"]:focus {
 input {
     font-family: 'Inter', 'PingFang SC', sans-serif;
 }
-
-/* 移除原有的时间输入框样式，确保字体统一 */
-/* .time-group input[type="time"] { 
-    ... 
-} 
-*/ 
-/* 请确保在你的 styles.css 中删除或覆盖任何特定的 type="time" 样式。 */
-
-
 /* --- 新增：Picker Wheel 模拟样式 --- */
 .picker-input {
     width: 100%;
-    padding: 12px 15px; /* 略微减少 padding 使其更紧凑 */
+    /* padding: 12px 15px; /* 略微减少 padding 使其更紧凑 */ */
     border: 1px solid #ddd; /* 使用更细的边框 */
     border-radius: 10px;
     font-size: 1.2em; /* 字体略大，突出显示时间 */
@@ -448,6 +439,7 @@ input {
     background-color: #f7f7f7; /* 浅灰色背景，模拟选择器背景 */
     cursor: pointer; /* 提示可点击 */
     transition: all 0.2s;
+    box-sizing: border-box;
 }
 
 .picker-input:hover {
@@ -459,4 +451,5 @@ input {
     border-color: #00bcd4; 
     box-shadow: 0 0 8px rgba(0, 188, 212, 0.2);
     outline: none;
+
 }
