@@ -408,6 +408,8 @@ input[type="number"]:focus {
     font-weight: 600;
     color: #333;
     box-sizing: border-box;
+    /* 再次强制重置，并移除时间输入框可能带有的旋转箭头 */
+    -webkit-appearance: none;
 }
 
 .summary-text {
@@ -496,3 +498,4 @@ input[type="date"]:focus {
     -webkit-appearance: none;
 
 }
+
