@@ -398,20 +398,6 @@ input[type="number"]:focus {
     opacity: 1;
 }
 
-/* 时间输入框调整，使其在一行显示得更紧凑 */
-.time-group input[type="time"] {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    font-size: 1.1em;
-    font-weight: 600;
-    color: #333;
-    box-sizing: border-box;
-    /* 再次强制重置，并移除时间输入框可能带有的旋转箭头 */
-    -webkit-appearance: none;
-}
-
 .summary-text {
     text-align: right;
     font-size: 0.9em;
@@ -428,13 +414,6 @@ input[type="number"]:focus {
 input {
     font-family: 'Inter', 'PingFang SC', sans-serif;
 }
-
-/* 移除原有的时间输入框样式，确保字体统一 */
-/* .time-group input[type="time"] { 
-    ... 
-} 
-*/ 
-/* 请确保在你的 styles.css 中删除或覆盖任何特定的 type="time" 样式。 */
 
 
 /* --- 新增：Picker Wheel 模拟样式 --- */
@@ -497,5 +476,34 @@ input[type="date"]:focus {
     /* 再次强制重置，并移除时间输入框可能带有的旋转箭头 */
     -webkit-appearance: none;
 
+}
+/* ------------------------------------------------ */
+/* 统一数字、日期和时间输入框的样式，解决 iOS 布局问题 */
+/* ------------------------------------------------ */
+input[type="number"],
+input[type="date"],
+input[type="time"] {
+    width: 100%;
+    padding: 15px; 
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1.1em; 
+    font-weight: 600;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    /* 核心修复点：强制移除原生 UI */
+    -webkit-appearance: none; 
+    box-sizing: border-box;
+    margin: 0; /* 确保没有默认的 margin */
+}
+
+/* 统一聚焦时的样式 */
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 8px rgba(0, 188, 212, 0.2);
+    outline: none;
+    -webkit-appearance: none; /* 再次确保聚焦时不恢复原生样式 */
 }
 
