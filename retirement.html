@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>退休倒计时</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* 仅添加少量专属样式，确保字体统一和输入框视觉正确 */
+        .calculator-container {
+            max-width: 450px; 
+            padding: 30px;
+        }
+
+        /* 统一字体，特别是日期输入框 */
+        input[type="date"] {
+            font-family: 'Inter', 'PingFang SC', sans-serif; 
+            /* 确保 border-box 和 width: 100% 继承自 styles.css */
+            box-sizing: border-box; 
+            width: 100%;
+        }
+
+        /* --- 倒计时结果区样式覆盖：使其看起来像 result-card --- */
+        .result-card-retirement {
+            background-color: #e0f7fa; /* 使用主页的浅青色背景 */
+            padding: 20px 25px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.1); 
+        }
+
+        .countdown-value {
+            font-size: 4em; /* 保持大字体 */
+            font-weight: 800;
+            color: #00bcd4; /* 使用主页的强调色 (青色) */
+            line-height: 1.1;
+            margin-top: 10px;
+        }
+
+        .countdown-unit {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #777;
+        }
+
+        .retirement-info {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1 class="title">退休倒计时 🏖️</h1>
+
+        <div id="retirementResultCard" class="result-card-retirement">
+            <p class="result-label">距离退休还有</p>
+            <div id="countdownDisplay" class="countdown-value">0</div>
+            <p class="countdown-unit">天</p>
+            <p id="retirementDateInfo" class="retirement-info">预计退休日期：未设置</p>
+        </div>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label for="birthDate">您的出生日期</label>
+                <input type="date" id="birthDate" required>
+            </div>
+
+            <div class="input-group">
+                <label for="retirementAge">预计退休年龄 (岁)</label>
+                <input type="number" id="retirementAge" placeholder="输入预计退休年龄" value="60" min="18" max="100">
+            </div>
+        </div>
+
+        <div class="action-section main-actions">
+            <button id="calculateCountdown" class="button primary">计算天数</button>
+        </div>
+        
+        <div class="action-section reset-action">
+            <button class="button secondary" onclick="window.location.href='index.html'">
+                返回带薪拉屎计算器
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        function calculateRetirementCountdown() {
+            const birthDateInput = document.getElementById('birthDate').value;
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            const countdownDisplay = document.getElementById('countdownDisplay');
+            const retirementDateInfo = document.getElementById('retirementDateInfo');
+
+            if (!birthDateInput || isNaN(retirementAge) || retirementAge <= 0) {
+                countdownDisplay.textContent = '0';
+                retirementDateInfo.textContent = '预计退休日期：请完整输入信息';
+                return;
+            }
+
+            // 1. 计算退休日期
+            const birth = new Date(birthDateInput);
+            const retirementYear = birth.getFullYear() + retirementAge;
+            
+            // 保持月份和日期不变
+            const retirementDate = new Date(retirementYear, birth.getMonth(), birth.getDate());
+
+            // 2. 计算今天到退休日期的天数差
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); 
+            
+            if (retirementDate <= today) {
+                countdownDisplay.textContent = '0';
+                retirementDateInfo.textContent = '恭喜！您已达到或超过退休年龄。';
+                return;
+            }
+            
+            const timeDifference = retirementDate.getTime() - today.getTime();
+            const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+            // 3. 更新 UI
+            countdownDisplay.textContent = daysLeft.toLocaleString(); 
+            
+            const retirementDateString = retirementDate.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            retirementDateInfo.textContent = `预计退休日期：${retirementDateString}`;
+        }
+
+        // 绑定事件监听器
+        document.getElementById('calculateCountdown').addEventListener('click', calculateRetirementCountdown);
+        document.getElementById('birthDate').addEventListener('change', calculateRetirementCountdown);
+        document.getElementById('retirementAge').addEventListener('input', calculateRetirementCountdown);
+
+        // 页面加载时执行一次计算
+        document.addEventListener('DOMContentLoaded', () => {
+             // 设置出生日期的默认值为一个示例值，便于演示
+             const today = new Date();
+             const defaultBirthDate = new Date(today.getFullYear() - 30, today.getMonth(), today.getDate());
+             document.getElementById('birthDate').value = defaultBirthDate.toISOString().split('T')[0];
+             
+             calculateRetirementCountdown();
+        });
+    </script>
+</body>
+</html>
