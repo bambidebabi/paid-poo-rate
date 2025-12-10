@@ -482,6 +482,8 @@ input[type="date"] {
     color: #333;
     transition: border-color 0.3s, box-shadow 0.3s;
     /* box-sizing: border-box; 应该在通用 input 规则中定义 */
+    /* 再次强制重置，并移除时间输入框可能带有的旋转箭头 */
+    -webkit-appearance: none;
 }
 
 /* 统一聚焦时的样式 */
@@ -490,4 +492,7 @@ input[type="date"]:focus {
     border-color: #00bcd4;
     box-shadow: 0 0 8px rgba(0, 188, 212, 0.2);
     outline: none;
+    /* 再次强制重置，并移除时间输入框可能带有的旋转箭头 */
+    -webkit-appearance: none;
+
 }
